@@ -1,0 +1,19 @@
+---
+title: "Fast-SCNN Road Segmentation"
+slug: "fast-scnn-road-segmentation"
+question: "How can road scenes be segmented efficiently without requiring an unnecessarily heavy model?"
+status: "complete"
+date: "May 2025"
+tags: ["Computer Vision", "Deep Learning", "Python", "PyTorch"]
+result: "86.6% pixel accuracy at ~20.6ms/frame (48.5 FPS) on CPU — measured on the training set; a proper held-out benchmark is still pending."
+lesson: "The model looked validated by its own numbers until closer inspection showed the accuracy was training-set only and the mIoU/F1 calculations had real bugs."
+order: 1
+---
+
+{/* This project has a dedicated hand-built page at
+    /work/fast-scnn-road-segmentation (see src/app/work/fast-scnn-road-segmentation/page.tsx)
+    rather than being rendered from this MDX file. The interactive architecture
+    diagram and the verified/confirmed distinction throughout the case study
+    needed more structure than MDX + component injection could cleanly give
+    them. This frontmatter is kept in sync by hand for the homepage/work-index
+    summary cards. */}
