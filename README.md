@@ -43,11 +43,3 @@ New projects and notebook entries are MDX files, not code changes:
 
 See `docs/CONTENT_MODEL.md` for required frontmatter fields.
 
-## Things Still Needed From Anwar
-
-- GitHub/LinkedIn URLs (currently `PLACEHOLDER` in `SiteFooter.tsx` and `contact/page.tsx`)
-- Real email address (`contact/page.tsx`)
-- Resume PDF → place at `public/files/resume.pdf`
-- Fast-SCNN project files (code, presentation, results) for the first full case study
-- Personal story content for `/about` (placeholders clearly marked in-page)
-- Headshot photo (optional — used subtly per the design brief, not a hero portrait)
