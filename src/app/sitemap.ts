@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next';
 // NOTE: baseUrl is a placeholder until Anwar has a real deployed domain.
 // Update this the moment a Vercel URL or custom domain exists — search
 // stitching (Google Search Console etc.) depends on this being accurate.
-const baseUrl = 'https://REPLACE-WITH-DEPLOYED-DOMAIN.vercel.app';
+const baseUrl = 'https://portfolio-anwar-zeta.vercel.app';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [

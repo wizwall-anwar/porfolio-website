@@ -1,9 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { SectionContainer } from '../layout/SectionContainer';
-
-export type VisitorType = 'hiring' | 'technical' | 'building' | 'curious' | null;
+import { useVisitorLens, type VisitorType } from './VisitorLensContext';
 
 const lenses = [
   {
@@ -33,43 +30,27 @@ const lenses = [
 ];
 
 export function VisitorLens() {
-  const [selected, setSelected] = useState<VisitorType>(null);
-
-  // Restore selection from sessionStorage after mount (browser-only API,
-  // unavailable during SSR — this is the standard exception to the rule).
-  useEffect(() => {
-    const stored = sessionStorage.getItem('visitor-lens') as VisitorType;
-    if (stored) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSelected(stored);
-    }
-  }, []);
+  const { lens: selected, setLens } = useVisitorLens();
 
   const handleSelect = (id: VisitorType) => {
-    const next = selected === id ? null : id;
-    setSelected(next);
-    if (next) {
-      sessionStorage.setItem('visitor-lens', next);
-    } else {
-      sessionStorage.removeItem('visitor-lens');
-    }
+    setLens(selected === id ? null : id);
   };
 
   return (
-    <SectionContainer className="py-16 sm:py-20">
-      <div className="border-t border-border pt-12 sm:pt-16">
+    <section className="w-full px-5 sm:px-8 lg:px-12 py-16 sm:py-20">
+      <div className="mx-auto max-w-[1200px] border-t border-border pt-12 sm:pt-16">
         <p className="text-eyebrow mb-4">What brings you here?</p>
         <p className="text-text-secondary text-sm mb-8 max-w-md">
-          This won&apos;t change the page — it highlights what&apos;s most relevant to you.
+          Pick one — a few notes below will adjust to point you at what&apos;s most relevant.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {lenses.map((lens) => {
-            const isActive = selected === lens.id;
+          {lenses.map((lensOption) => {
+            const isActive = selected === lensOption.id;
             return (
               <button
-                key={lens.id}
-                onClick={() => handleSelect(lens.id)}
+                key={lensOption.id}
+                onClick={() => handleSelect(lensOption.id)}
                 className={`text-left p-5 rounded-lg border transition-all duration-200 group ${
                   isActive
                     ? 'border-accent bg-accent-subtle/40 ring-1 ring-accent/20'
@@ -82,23 +63,19 @@ export function VisitorLens() {
                     isActive ? 'text-accent' : 'text-text-tertiary group-hover:text-accent'
                   }`}
                 >
-                  {lens.icon}
+                  {lensOption.icon}
                 </span>
-                <p
-                  className={`font-medium text-sm mb-1 ${
-                    isActive ? 'text-text-primary' : 'text-text-primary'
-                  }`}
-                >
-                  {lens.label}
+                <p className="font-medium text-sm mb-1 text-text-primary">
+                  {lensOption.label}
                 </p>
                 <p className="text-xs text-text-tertiary leading-relaxed">
-                  {lens.description}
+                  {lensOption.description}
                 </p>
               </button>
             );
           })}
         </div>
       </div>
-    </SectionContainer>
+    </section>
   );
 }

@@ -25,6 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://portfolio-anwar-zeta.vercel.app'),
   title: {
     default: 'Anwar Ayoon — Problem Solver Using Technology',
     template: '%s — Anwar Ayoon',
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
       'Technology-driven problem solver using data, software, and AI to make complicated systems more practical, accessible, and human.',
     type: 'website',
     locale: 'en_US',
-    // url: 'https://PLACEHOLDER.vercel.app',
+    url: 'https://portfolio-anwar-zeta.vercel.app',
     siteName: 'Anwar Ayoon',
   },
   robots: {

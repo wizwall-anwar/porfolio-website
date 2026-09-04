@@ -119,15 +119,51 @@ direction. Needs Anwar's clarification before either document is finalized.
 - [x] `sitemap.ts` and `robots.ts` added (Next.js App Router auto-generation)
 - [x] Build + lint clean, all 12 routes (including `/sitemap.xml`,
       `/robots.txt`) verified 200 with zero console errors
-- [ ] **`baseUrl` in `sitemap.ts` and `robots.ts` is a placeholder
-      (`REPLACE-WITH-DEPLOYED-DOMAIN.vercel.app`) — update the moment a real
-      Vercel URL or custom domain exists**
+- [x] `baseUrl` in `sitemap.ts`, `robots.ts`, and OG metadata in `layout.tsx`
+      updated to the real live URL: `https://portfolio-anwar-zeta.vercel.app`
 - [ ] No git repository initialized yet in this environment — Anwar needs to
       `git init`, push to a GitHub repo he owns, then import that repo in
       Vercel. This can't be done from this sandboxed environment (no GitHub/
       Vercel account access) — see chat response for exact steps.
 - [ ] OG image / social-sharing image not yet created (placeholder in
       `layout.tsx` metadata) — low priority, doesn't block a first deploy
+
+## Live-site review findings (from acting as HR-manager persona on the deployed site)
+
+Found and fixed same-session:
+- [x] **Visitor lens did nothing.** The "I'm hiring / technical / building /
+      curious" selector visually toggled but never affected any other content
+      — a real gap versus the original spec ("selecting one should subtly
+      highlight or prioritize relevant content"). Built `VisitorLensContext`
+      (shared React context) + `LensNote` (small client island) so
+      FeaturedProjects and PhilosophyTeaser now show one short, relevant note
+      when a lens is selected, and nothing when it isn't. Verified with
+      Playwright: exactly one note shows at a time, switches cleanly, clears
+      on deselect.
+- [x] **Three dead links.** PhilosophyTeaser's "Read more →" links pointed to
+      `/notebook/build-before-perfect` etc. — slugs that don't exist since
+      Notebook has zero entries. Removed the links (cards are no longer
+      clickable to nowhere); added one working link to `/open-notebook`
+      instead, framed honestly ("the full entry is being written").
+- [x] **Internal dev notes had leaked into public copy.** Card text like
+      "same as Fast-SCNN got" and repeated "Pending — project files not yet
+      reviewed" reads as confusing internal tracking language to an external
+      visitor, not intentional transparency. Rewritten in external-facing
+      voice.
+- [x] **Notebook and Notebook/[slug] were static placeholders, not wired to
+      the content pipeline** — even though `getAllNotebookEntries()` /
+      `getNotebookBySlug()` already existed in `src/lib/content.ts` and
+      `next-mdx-remote` was already a dependency. Wired both pages for real:
+      index now calls `getAllNotebookEntries()` with a graceful empty state,
+      detail page renders real MDX via `next-mdx-remote/rsc` with
+      `generateStaticParams`. The moment a real `.mdx` file lands in
+      `content/notebook/`, it appears — no more code changes needed.
+
+Noted but not unilaterally changed (flagged to Anwar instead, since these are
+identity/content-strategy calls, not bugs):
+- "Notebook" vs "Open Notebook" as nav labels are genuinely ambiguous to a
+  first-time visitor before either is clicked — worsened right now by both
+  being nearly empty. Options discussed in chat rather than decided here.
 
 ## Phase 5 — Notebook
 - [ ] Notebook index page

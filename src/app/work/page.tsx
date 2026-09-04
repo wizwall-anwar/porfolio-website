@@ -29,7 +29,7 @@ const projects = [
     slug: 'form-correction',
     question: 'Can computer vision provide useful form feedback without requiring constant expert supervision?',
     status: 'in-progress' as const,
-    result: 'Pending — project files not yet reviewed.',
+    result: 'Still in active development — check back for a full write-up.',
     tags: ['Computer Vision', 'Pose Estimation', 'Python'],
   },
 ];

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { SectionContainer } from '../layout/SectionContainer';
 import { StatusBadge } from '../shared/StatusBadge';
 import { Tag } from '../shared/Tag';
+import { LensNote } from './LensNote';
 
 const projects = [
   {
@@ -22,7 +23,7 @@ const projects = [
     status: 'complete' as const,
     result:
       'From the resume: R² improved from 0.14 to 0.59 through progressive feature engineering, then 0.64 test R² with tuned XGBoost — full case study pending code/notebook review.',
-    lesson: 'Pending — needs either source files or a detailed account, same as Fast-SCNN got.',
+    lesson: 'The full case study — architecture, code, and reflection — is being written next.',
     tags: ['Data Analytics', 'Python', 'XGBoost'],
   },
   {
@@ -30,8 +31,8 @@ const projects = [
     question:
       'Can computer vision provide useful form feedback without requiring constant expert supervision?',
     status: 'in-progress' as const,
-    result: 'Pending — project files not yet reviewed.',
-    lesson: 'Pending — project files not yet reviewed.',
+    result: 'This one is still in active development — check back for a full write-up.',
+    lesson: 'Documenting a project while it\'s still unfinished, on purpose.',
     tags: ['Computer Vision', 'Pose Estimation', 'Python'],
   },
 ];
@@ -54,6 +55,24 @@ export function FeaturedProjects() {
             View all →
           </Link>
         </div>
+
+        <LensNote
+          messages={{
+            hiring: {
+              text: 'Since you\'re hiring: full resume with real numbers is one click away.',
+              href: '/resume',
+              linkLabel: 'View resume',
+            },
+            technical: {
+              text: 'Since you\'re technical: the Fast-SCNN case study has an interactive architecture diagram with exact param counts.',
+              href: '/work/fast-scnn-road-segmentation',
+              linkLabel: 'See the diagram',
+            },
+            building: {
+              text: 'Since you\'re building something: each case study below is written around the actual decisions and dead ends, not just the outcome.',
+            },
+          }}
+        />
 
         <div className="space-y-6">
           {projects.map((project) => (
